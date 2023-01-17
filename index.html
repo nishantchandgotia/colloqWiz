@@ -19,8 +19,14 @@
     <title>Colloquium Wizard</title>
 <!--     <link rel="stylesheet" href="style.css"> -->
 <style>
+:root {
+  --text-color: black;
+  --bg-color: white;
+}
 body {
-font-family: sans-serif
+background-color: var(--bg-color);
+color: var(--text-color);
+font-family: sans-serif;
 }
 span.output {
 white-space: pre-wrap;
@@ -29,12 +35,21 @@ word-wrap: anywhere;
 .panel {
 max-width: 40em;
 }
+#renderedTemplate {
+border: 1px var(--text-color) solid;
+}
 #thisIsFlex {
 display: flex;
 flex-flow: row wrap;
 }
 #thisIsFlex div {
     padding: 10px
+}
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --text-color: white;
+    --bg-color: black;
+  }
 }
 </style>
 
@@ -218,11 +233,16 @@ flex-flow: row wrap;
 </form>
 
 <div class="panel">
-<div id="renderedTemplate" style="border: 1px black solid">
+<div id="renderedTemplate" style="">
 </div>
 <button id="copyButton">⚠️Copy rendered output as HTML</button>
 </div>
 
 </div>
   </body>
+<footer>
+<pre>
+=CONCATENATE("http://lab05.tifrbng.res.in:8000/?title=TIFR-CAM%20Colloquium&remarks=", ENCODEURL("There will be snacks and coffee."), "&speaker=", ENCODEURL(A2), "&venue=", ENCODEURL(B2), "&date=",ENCODEURL(C2), "&time=",ENCODEURL(D2), "&subject=", ENCODEURL(E2), "&abstract=", ENCODEURL(F2))
+</pre>
+</footer>
 </html>
