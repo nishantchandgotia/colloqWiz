@@ -19,7 +19,10 @@
     <title>Colloquium Wizard</title>
 <!--     <link rel="stylesheet" href="style.css"> -->
 <style>
-span {
+body {
+font-family: sans-serif
+}
+span.output {
 white-space: pre-wrap;
 word-wrap: anywhere;
 }
@@ -85,7 +88,8 @@ flex-flow: row wrap;
 	        title = titleBox.value
 	        speaker = speakerBox.value
 	        venue = venueBox.value  
-	        datetime = dateBox.value + " " + timeBox.value
+	        d = new Date(dateBox.value)
+	        datetime = d.toString() == "Invalid Date"? " " : d.toDateString() + ", " + timeBox.value
 	        subject = subjectBox.value
 	        abstr = abstractBox.value
 	        remarks = remarksBox.value
@@ -95,7 +99,7 @@ flex-flow: row wrap;
 <h3>Speaker: ${speaker}</h3>
 
 <p>
-<b>Venue</b>: <span> ${venue} </span>
+<b>Venue</b>: <span class="output"> ${venue} </span>
 </p>
 
 <p>
@@ -107,10 +111,10 @@ flex-flow: row wrap;
 </p>
 
 <p>
-<b>Abstract</b>: <span> ${abstr} </span>
+<b>Abstract</b>: <span class="output"> ${abstr} </span>
 </p>
 
-<p><i><span>${remarks}</span> </i></p>`
+<p><i><span class="output">${remarks}</span> </i></p>`
    	        console.log('runTemplate ran')
    	        // titleBox.value+speakerBox.value+venueBox.value+dateBox.value+timeBox.value+subjectBox.value+abstractBox.value
 	        renderMathInElement(out, {
@@ -152,7 +156,7 @@ flex-flow: row wrap;
             return decodeURIComponent(results[1].replace(/\+/g, " "));
         }
 	</script>
-	<div id="thisIsFlex">
+	<div id="thisIsFlex" width="100%"">
 	<form class="panel" id="colloq-details" action="#" onsubmit="return runTemplate(this);">
 <fieldset>
 <legend>Colloquium Details</legend>
@@ -184,13 +188,13 @@ flex-flow: row wrap;
 
 <div>
  <label for="subject">Subject</label>
- <textarea name="subject" type="textarea" placeholder="LaTeX works" required>
+ <textarea spellcheck="true" name="subject" type="textarea" placeholder="LaTeX works" required>
  </textarea>
 </div>
 
 <div>
  <label for="abstract">Abstract</label>
- <textarea name="abstract" type="textarea" placeholder="LaTeX works">
+ <textarea spellcheck="true" name="abstract" type="textarea" placeholder="LaTeX works">
  </textarea >
 </div>
 
@@ -203,8 +207,8 @@ flex-flow: row wrap;
 
 <div>
  <label for="remarks">Extra remarks</label>
- <textarea name="remarks" type="textarea" value="There will be snacks and coffee after the colloquium for participants  at TIFR-CAM.">
- </textarea>
+ <textarea spellcheck="true" name="remarks" placeholder="">
+</textarea>
 </div>
 
 <div>
