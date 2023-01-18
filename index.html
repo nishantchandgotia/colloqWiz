@@ -24,23 +24,23 @@
   --bg-color: white;
 }
 body {
-background-color: var(--bg-color);
-color: var(--text-color);
-font-family: sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: sans-serif;
 }
 span.output {
-white-space: pre-wrap;
-word-wrap: anywhere;
+    white-space: pre-wrap;
+    word-wrap: anywhere;
 }
 .panel {
-max-width: 40em;
+    max-width: 40em;
 }
 #renderedTemplate {
-border: 1px var(--text-color) solid;
+    border: 1px var(--text-color) solid;
 }
 #thisIsFlex {
-display: flex;
-flex-flow: row wrap;
+    display: flex;
+    flex-flow: row wrap;
 }
 #thisIsFlex div {
     padding: 10px
@@ -70,14 +70,15 @@ flex-flow: row wrap;
             abstractBox = document.getElementsByName('abstract')[0]
             remarksBox = document.getElementsByName('remarks')[0]
             
-            titleBox.value = getParameterByName('title')
-            speakerBox.value = getParameterByName('speaker')
-            venueBox.value = getParameterByName('venue')
-            dateBox.value = getParameterByName('date')
-            timeBox.value = getParameterByName('time')
-            subjectBox.value = getParameterByName('subject')
-            abstractBox.value = getParameterByName('abstract')
-            remarksBox.value = getParameterByName('remarks')
+            titleBox.value = getParameterByNameOwDefault('title')
+            speakerBox.value = getParameterByNameOwDefault('speaker')
+            venueBox.value = getParameterByNameOwDefault('venue')
+            dateBox.value = getParameterByNameOwDefault('date')
+            timeBox.value = getParameterByNameOwDefault('time')
+            subjectBox.value = getParameterByNameOwDefault('subject')
+            abstractBox.value = getParameterByNameOwDefault('abstract')
+            remarksBox.value = getParameterByNameOwDefault('remarks')
+            
             runTemplate()
             
             allInputs = Array.from(document.getElementsByTagName('input'))
@@ -87,29 +88,20 @@ flex-flow: row wrap;
             }
             
             copyButton = document.getElementById('copyButton')
-            copyButton.addEventListener('click', (event)=> copyButton.innerText = copyRendered())
-	    }
-    	out = document.getElementById('renderedTemplate')
-        titleBox = document.getElementsByName('title')[0]
-        speakerBox = document.getElementsByName('speaker')[0]
-        venueBox = document.getElementsByName('venue')[0]
-        dateBox = document.getElementsByName('date')[0]
-        timeBox = document.getElementsByName('time')[0]
-        subjectBox = document.getElementsByName('subject')[0]
-        abstractBox = document.getElementsByName('abstract')[0]
-        remarksBox = document.getElementsByName('remarks')[0]
-        
+            copyButton.addEventListener('click', 
+                (event)=> copyButton.innerText = copyRendered())
+	    }        
 	    function runTemplate(object) {
 	        title = titleBox.value
 	        speaker = speakerBox.value
 	        venue = venueBox.value  
-	        d = new Date(dateBox.value)
-	        datetime = d.toString() == "Invalid Date"? " " : d.toDateString() + ", " + timeBox.value
+	        date = new Date(dateBox.value)
+	        datetime = date.toString() == "Invalid Date"? " " : date.toDateString() + ", " + timeBox.value
 	        subject = subjectBox.value
 	        abstr = abstractBox.value
 	        remarks = remarksBox.value
    	        out.innerHTML = templateText = `
-   	        <h1>${title}</h1>
+<h1>${title}</h1>
 
 <h3>Speaker: ${speaker}</h3>
 
@@ -149,7 +141,7 @@ flex-flow: row wrap;
         function copyRendered() {
             return "Sorry, not implemented yet. Please copy manually."
             navigator.clipboard.write([
-        new ClipboardItem({
+            new ClipboardItem({
             "text/html": async () => {
                 const text = out.innerHTML;
                 return new Blob([text], { type: 'text/html' });
