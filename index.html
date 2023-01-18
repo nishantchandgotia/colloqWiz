@@ -9,7 +9,6 @@
 <script defer src="katex.min.js" integrity="sha384-PwRUT/YqbnEjkZO0zZxNqcxACrXe+j766U2amXcgMg5457rve2Y7I6ZJSm2A0mS4" crossorigin="anonymous"></script>
 <script defer src="contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
     onload="renderMathInElement(document.body);"></script>
-   
 
 <!-- 
 **** For MathJax *****
@@ -87,7 +86,7 @@ span.output {
             
             copyButton = document.getElementById('copyButton')
             copyButton.addEventListener('click', 
-                (event)=> copyButton.innerText = copyRendered())
+               (event)=> copyRendered(out))
 	    }        
 	    function runTemplate(object) {
 	        title = titleBox.value
@@ -136,17 +135,37 @@ span.output {
           });
           return;
         }
-        function copyRendered() {
-            return "Sorry, not implemented yet. Please copy manually."
-            navigator.clipboard.write([
-            new ClipboardItem({
-            "text/html": async () => {
-                const text = out.innerHTML;
-                return new Blob([text], { type: 'text/html' });
-                }
-                }),
-            ]).then(()=> 'success in copying').catch((error)=> error);
-        }
+        function copyRendered(object) {
+            copyButton.innerHTML = "Sorry, not supported yet."
+            return
+        // from https://stackoverflow.com/a/74216984/19528346
+        html = object.innerHTML
+         const clipboardItem = new
+        ClipboardItem({'text/html':  new Blob([out.innerHTML], {type: 'text/html'})
+                /*,
+                'text/plain': new Blob([out.innerHTML],
+                {type: 'text/plain'})
+                */
+    });
+     navigator.clipboard.write([clipboardItem]).
+            then(_ =>  copyButton.innerHTML = "Copied!",
+                 error => copyButton.innerHTML = error);
+                 
+        // From https://garron.net/code/clipboard-polyfill/
+        // var resultField = document.getElementById("markup-dom-copy-result");
+        var blob = new Blob([new XMLSerializer().serializeToString(out)], { type: "text/html" });//stringToBlob("text/plain", document.getElementById("markup-dom-copy-source").innerText);
+        var items = [new ClipboardItem({
+              "text/html": blob
+            })];
+            // var dt = new clipboard.DT();
+            // dt.setData("text/html", new XMLSerializer().serializeToString(document.getElementById("markup-dom-copy-source")));
+            // dt.setData("text/plain", document.getElementById("markup-dom-copy-source").innerText);
+            clipboard.write(items).then(function () {
+              return "success";
+            }, function (err) {
+              return "Error " + err;
+            });
+          }
         
         function getParameterByNameOwDefault(name)
         {
