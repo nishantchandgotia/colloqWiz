@@ -12,12 +12,12 @@
    
 
 <!-- 
+**** For MathJax *****
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
  -->
 
-    <title>Colloquium Wizard</title>
-<!--     <link rel="stylesheet" href="style.css"> -->
+<title>Colloquium Wizard</title>
 <style>
 :root {
   --text-color: black;
@@ -55,9 +55,6 @@ span.output {
 
   </head>
   <body onload="onceLoaded()">
-<!-- 
-<script src="template.js"></script>
- -->
 	<script>
 	    function onceLoaded() {
             out = document.getElementById('renderedTemplate')
@@ -122,8 +119,8 @@ span.output {
 </p>
 
 <p><i><span class="output">${remarks}</span> </i></p>`
-   	        console.log('runTemplate ran')
-   	        // titleBox.value+speakerBox.value+venueBox.value+dateBox.value+timeBox.value+subjectBox.value+abstractBox.value
+
+        // From KaTeX documentation
 	        renderMathInElement(out, {
           // customised options
           // • auto-render specific keys, e.g.:
@@ -228,13 +225,14 @@ span.output {
 <div id="renderedTemplate" style="">
 </div>
 <button id="copyButton">⚠️Copy rendered output as HTML</button>
+<br>
 </div>
 
 </div>
   </body>
-<footer>
+<footer  hidden="true">
 <pre>
-=CONCATENATE("http://lab05.tifrbng.res.in:8000/?title=TIFR-CAM%20Colloquium&remarks=", ENCODEURL("There will be snacks and coffee."), "&speaker=", ENCODEURL(A2), "&venue=", ENCODEURL(B2), "&date=",ENCODEURL(C2), "&time=",ENCODEURL(D2), "&subject=", ENCODEURL(E2), "&abstract=", ENCODEURL(F2))
+=CONCATENATE("index.html?title=TIFR-CAM%20Colloquium&remarks=", ENCODEURL("There will be snacks and coffee."), "&speaker=", ENCODEURL(A2), "&venue=", ENCODEURL(B2), "&date=",ENCODEURL(C2), "&time=",ENCODEURL(D2), "&subject=", ENCODEURL(E2), "&abstract=", ENCODEURL(F2))
 </pre>
 </footer>
 </html>
