@@ -56,6 +56,7 @@ span.output {
   </head>
   <body onload="onceLoaded()">
 	<script>
+        defaults = {'title': "TIFR-CAM Colloquium", 'remarks':'There will be snacks and coffee after the colloquium for participants  at TIFR-CAM.'}
 	    function onceLoaded() {
             out = document.getElementById('renderedTemplate')
             titleBox = document.getElementsByName('title')[0]
@@ -147,7 +148,7 @@ span.output {
             ]).then(()=> 'success in copying').catch((error)=> error);
         }
         
-        function getParameterByName(name)
+        function getParameterByNameOwDefault(name)
         {
         // https://stackoverflow.com/questions/16188151/populate-input-field-from-url-variable-using-either-javascript-or-jquery
           name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
@@ -155,7 +156,7 @@ span.output {
           var regex = new RegExp(regexS);
           var results = regex.exec(window.location.search);
           if(results == null)
-            return "";
+            return defaults[name] == undefined? "": defaults[name];
           else
             return decodeURIComponent(results[1].replace(/\+/g, " "));
         }
