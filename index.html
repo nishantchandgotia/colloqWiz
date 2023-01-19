@@ -55,7 +55,10 @@ span.output {
   </head>
   <body onload="onceLoaded()">
 	<script>
-        defaults = {'title': "TIFR-CAM Colloquium", 'remarks':'There will be snacks and coffee after the colloquium for participants  at TIFR-CAM.'}
+        defaults = {
+					'title': "TIFR-CAM Colloquium", 
+					'remarks':'There will be snacks and coffee after the colloquium for participants at TIFR-CAM.'
+		}
 	    function onceLoaded() {
             out = document.getElementById('renderedTemplate')
             titleBox = document.getElementsByName('title')[0]
