@@ -101,25 +101,27 @@ span.output {
 	        abstr = abstractBox.value
 	        remarks = remarksBox.value
    	        out.innerHTML = templateText = `
+
 <p><b>${title}</b></p>
 <p><b>Speaker:</b> ${speaker}</p>
+
 <p>
-<b>Venue</b>: <span class="output"> ${venue} </span>
+<b>Venue:</b> <span class="output">${venue}</span>
 </p>
 
 <p>
-<b>Date and time</b>: ${datetime}
+<b>Date and time:</b> ${datetime}
 </p>
 
 <p>
-<b>Subject</b> : ${subject}
+<b>Subject:</b> ${subject}
 </p>
 
 <p>
-<b>Abstract</b>: <span class="output"> ${abstr} </span>
+<b>Abstract:</b> <span class="output">${abstr}</span>
 </p>
 
-<p><i><span class="output">${remarks}</span> </i></p>`
+<p><i><span class="output">${remarks}</span></i></p>`
 
         // From KaTeX documentation
 	        renderMathInElement(out, {
